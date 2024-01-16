@@ -32,6 +32,7 @@ mongoose
 
 //  GET  /books - Retrieve all books from the database
 app.get("/books", (req, res) => {
+  // find({}) is a Mongoose method that retrieves all documents from the Book collection in one's MongoDB. 
   Book.find({})
     .then((books) => {
       console.log("Retrieved books ->", books);
