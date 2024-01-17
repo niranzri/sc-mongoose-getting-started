@@ -43,3 +43,19 @@ app.get("/books", (req, res) => {
       res.status(500).send({ error: "Failed to retrieve books" });
     });
 });
+
+//  GET  /books - Retrieve one book from the database
+app.get("/books/:id", (req, res) => {
+  const bookId = req.params.id;
+
+  Book.findById(bookId)
+    .populate("author")
+    .then((book) => {
+      console.log("Retrieved book with author details ->", book);
+      res.status(200).json(book);
+    })
+    .catch((error) => {
+      console.error("Error while retrieving boos ->", error);
+      res.status(500).send({ error: "Failed to retrieve book" });
+    });
+});
